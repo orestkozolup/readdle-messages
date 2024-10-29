@@ -1,7 +1,7 @@
 import { SxProps, Theme } from "@mui/material/styles";
 
 export const containerSx: SxProps = {
-  margin: "0.5rem 0",
+  margin: "0.5rem auto",
   overflowX: "auto",
   overflowY: "clip",
 };

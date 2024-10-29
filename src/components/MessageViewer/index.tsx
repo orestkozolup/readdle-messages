@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import MessageViewerActions from "../MessageViewerActions";
 import { messageService } from "../../services/messageService";
 import { useObservable } from "../../hooks/useObservable";
-import { containerSx } from "./styles";
+import { containerSx, messageContainerSx } from "./styles";
 import { getHumanReadableDate } from "../../utils/date";
 
 const MessageViewer = () => {
@@ -14,10 +14,14 @@ const MessageViewer = () => {
       {selectedMessage ? (
         <>
           <MessageViewerActions selectedMessage={selectedMessage} />
-          <h2>{selectedMessage.subject}</h2>
-          <p>From: <b>{selectedMessage.from}</b></p>
-          <i>{getHumanReadableDate(selectedMessage.date)}</i>
-          <p>{selectedMessage.content}</p>
+          <Box sx={messageContainerSx}>
+            <h2>{selectedMessage.subject}</h2>
+            <p>
+              From: <b>{selectedMessage.from}</b>
+            </p>
+            <i>{getHumanReadableDate(selectedMessage.date)}</i>
+            <p>{selectedMessage.content}</p>
+          </Box>
         </>
       ) : (
         <p>Select a message to view its details</p>
