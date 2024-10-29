@@ -1,5 +1,6 @@
-import { messageService, Message } from "../../services/messageService";
+import { messageService } from "../../services/messageService";
 import { useObservable } from "../../hooks/useObservable";
+import { Message } from "../../types";
 
 const MessageListSidebar = () => {
   const messages = useObservable(messageService.messages$, []);

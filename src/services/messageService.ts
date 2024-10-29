@@ -1,49 +1,8 @@
 import { BehaviorSubject, combineLatest } from "rxjs";
 import { map } from "rxjs/operators";
+
 import { httpService } from "./httpService";
-
-export interface Message {
-  id: string;
-  date: string;
-  from: string;
-  subject: string;
-  isRead: boolean;
-  isDeleted: boolean;
-  content: string;
-}
-
-export interface MockMessages {
-  [key: string]: Message[];
-}
-
-// validation functions
-function isMessage(obj: any): obj is Message {
-  return (
-    typeof obj === "object" &&
-    obj !== null &&
-    typeof obj.id === "string" &&
-    typeof obj.date === "string" &&
-    typeof obj.from === "string" &&
-    typeof obj.subject === "string" &&
-    typeof obj.isRead === "boolean" &&
-    typeof obj.isDeleted === "boolean" &&
-    typeof obj.content === "string"
-  );
-}
-
-function isMockMessages(obj: any): obj is Record<string, Message[]> {
-  if (typeof obj !== "object" || obj === null) return false;
-
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      const messages = obj[key];
-      if (!Array.isArray(messages) || !messages.every(isMessage)) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
+import { Message, isMessagesPayload } from "../types";
 
 // State observables
 const allMessages$ = new BehaviorSubject<Message[]>([]);
@@ -51,7 +10,7 @@ const visibleMessages$ = allMessages$.pipe(
   map((messages) => messages.filter((message) => !message.isDeleted))
 );
 const messageCategories$ = new BehaviorSubject<string[]>([]);
-const currentCategoryName$ = new BehaviorSubject<string>('');
+const currentCategoryName$ = new BehaviorSubject<string>("");
 const selectedMessageId$ = new BehaviorSubject<string | null>(null);
 const selectedMessage$ = combineLatest([allMessages$, selectedMessageId$]).pipe(
   map(
@@ -64,22 +23,23 @@ const selectedMessage$ = combineLatest([allMessages$, selectedMessageId$]).pipe(
 export const initializeMessages = async () => {
   const data = await httpService.getMessages();
 
-  if (!isMockMessages(data)) {
+  if (!isMessagesPayload(data)) {
     throw new Error("Invalid message structure");
   }
 
-  const mockMessages: Record<string, Message[]> = data;
+  const messagesData: Record<string, Message[]> = data;
 
-  const sortedMessages = mockMessages.inbox.sort((a, b) => {
+  const categoryNames = Object.keys(messagesData);
+
+  const sortedMessages = messagesData[categoryNames[0]].sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
 
-  Object.keys(mockMessages).forEach((key) => {
-    observables[key] = new BehaviorSubject(mockMessages[key]);
+  Object.keys(messagesData).forEach((key) => {
+    observables[key] = new BehaviorSubject(messagesData[key]);
   });
 
   allMessages$.next(sortedMessages);
-  const categoryNames = Object.keys(mockMessages);
   messageCategories$.next(categoryNames);
   currentCategoryName$.next(categoryNames[0]);
 };
