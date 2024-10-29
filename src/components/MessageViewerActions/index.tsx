@@ -1,5 +1,6 @@
-import { Box, Button, FormControlLabel, Switch } from "@mui/material";
+import { Box, FormControlLabel, Switch } from "@mui/material";
 
+import ModalButton from "../ModalButton";
 import { messageService } from "../../services/messageService";
 import { Message } from "../../types";
 import { containerSx, deleteBtnSx } from "./styles";
@@ -33,14 +34,12 @@ const MessageViewerActions = ({
         control={<Switch />}
         label={`Mark as ${readValue ? "Unread" : "Read"}`}
       />
-      <Button
-        variant="outlined"
-        color="error"
-        onClick={handleDelete}
-        sx={deleteBtnSx}
-      >
-        Delete
-      </Button>
+      <ModalButton
+        modalText={`Do you confirm you want to delete message "${selectedMessage.subject}"?`}
+        onConfirm={handleDelete}
+        buttonType="error"
+        buttonSx={deleteBtnSx}
+      />
     </Box>
   );
 };
