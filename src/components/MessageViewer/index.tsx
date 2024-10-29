@@ -15,9 +15,9 @@ const MessageViewer = () => {
         <>
           <MessageViewerActions selectedMessage={selectedMessage} />
           <h2>{selectedMessage.subject}</h2>
-          <p>From: {selectedMessage.from}</p>
+          <p>From: <b>{selectedMessage.from}</b></p>
+          <i>{getHumanReadableDate(selectedMessage.date)}</i>
           <p>{selectedMessage.content}</p>
-          <p>Received: {getHumanReadableDate(selectedMessage.date)}</p>
         </>
       ) : (
         <p>Select a message to view its details</p>

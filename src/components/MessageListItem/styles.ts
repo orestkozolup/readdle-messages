@@ -5,10 +5,11 @@ export const containerSx: SxProps<Theme> = {
   flexDirection: "column",
   borderRadius: "0.5rem",
   cursor: "pointer",
-  height: "10rem",
+  height: "7rem",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   padding: "0 0.5rem",
+  marginBottom: "0.5rem",
 
   backgroundImage: (theme) =>
     `linear-gradient(100deg, ${theme.palette.grey[300]} 50%, ${theme.palette.grey[400]} 100%)`,

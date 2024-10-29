@@ -13,11 +13,11 @@ const MessageListSidebar = () => {
   return (
     <Box sx={containerSx}>
       <NavBar />
-      <Stack spacing={1.5} sx={messageListSx}>
+      <Box sx={messageListSx}>
         {messages.map((message: Message) => (
           <MessageListItem message={message} key={message.id} />
         ))}
-      </Stack>
+      </Box>
     </Box>
   );
 };
