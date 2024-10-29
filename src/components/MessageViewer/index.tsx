@@ -5,7 +5,15 @@ const MessageViewer = () => {
   const selectedMessage = useObservable(messageService.selectedMessage$, null);
 
   const handleToggleRead = () => {
-    messageService.toggleReadStatus(selectedMessage.id);
+    if (selectedMessage) {
+      messageService.toggleReadStatus(selectedMessage.id);
+    }
+  };
+
+  const handleDelete = () => {
+    if (selectedMessage) {
+      messageService.deleteMessage(selectedMessage.id);
+    }
   };
 
   return (
@@ -17,6 +25,9 @@ const MessageViewer = () => {
           <p>{selectedMessage.content}</p>
           <button onClick={handleToggleRead}>
             Mark as {selectedMessage.isRead ? "Unread" : "Read"}
+          </button>
+          <button onClick={handleDelete} style={{ marginLeft: "10px" }}>
+            Delete
           </button>
         </>
       ) : (

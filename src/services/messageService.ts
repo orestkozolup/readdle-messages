@@ -42,9 +42,12 @@ export const mockMessages: Message[] = [
 ];
 
 // State observables
-const messages$ = new BehaviorSubject<Message[]>(mockMessages);
+const allMessages$ = new BehaviorSubject<Message[]>(mockMessages);
+const visibleMessages$ = allMessages$.pipe(
+  map((messages) => messages.filter((message) => !message.isDeleted))
+);
 const selectedMessageId$ = new BehaviorSubject<string | null>(null);
-const selectedMessage$ = combineLatest([messages$, selectedMessageId$]).pipe(
+const selectedMessage$ = combineLatest([allMessages$, selectedMessageId$]).pipe(
   map(
     ([messages, selectedMessageId]) =>
       messages.find((message: Message) => message.id === selectedMessageId) ||
@@ -57,8 +60,8 @@ const selectMessage = (id: string) => {
 };
 
 const toggleReadStatus = (messageId: string) => {
-  messages$.next(
-    messages$
+  allMessages$.next(
+    allMessages$
       .getValue()
       .map((message) =>
         message.id === messageId
@@ -68,9 +71,22 @@ const toggleReadStatus = (messageId: string) => {
   );
 };
 
+const deleteMessage = (messageId: string) => {
+  allMessages$.next(
+    allMessages$
+      .getValue()
+      .map((message) =>
+        message.id === messageId ? { ...message, isDeleted: true } : message
+      )
+  );
+
+  selectedMessageId$.next(null);
+};
+
 export const messageService = {
-  messages$,
+  messages$: visibleMessages$,
   selectedMessage$,
   selectMessage,
   toggleReadStatus,
+  deleteMessage,
 };
