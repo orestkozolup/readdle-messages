@@ -6,6 +6,7 @@ import { Message } from "../../types";
 import { messageService } from "../../services/messageService";
 import { containerSx, activeItemSx, readItemSx } from "./styles";
 import { combineStyles } from "../../utils/styles";
+import { getHumanReadableDate } from "../../utils/date";
 
 interface MessageListItemProps {
   message: Message;
@@ -31,7 +32,7 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
         {message.subject}
       </Typography>
       <Typography variant="body2" color="text.secondary" noWrap>
-        {message.from} — {message.date}
+        {message.from} — {getHumanReadableDate(message.date)}
       </Typography>
       <Typography
         variant="body2"
