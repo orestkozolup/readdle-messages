@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 import { useObservable } from "../../hooks/useObservable";
 import { Message } from "../../types";
 import { messageService } from "../../services/messageService";
-import { containerSx, activeItemSx, readItemSx } from "./styles";
+import { containerSx, activeItemSx, readItemSx, contentSx } from "./styles";
 import { combineStyles } from "../../utils/styles";
 import { getHumanReadableDate } from "../../utils/date";
 
@@ -28,20 +28,19 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 
   return (
     <Box sx={itemStyle} onClick={handleMessageClick}>
-      <Typography variant="subtitle1" component="h4" noWrap>
+      <Typography variant="subtitle1" noWrap>
         {message.subject}
       </Typography>
-      <Typography variant="body2" color="text.secondary" noWrap>
-        {message.from} — {getHumanReadableDate(message.date)}
+      <Typography variant="body2" noWrap>
+        From: {message.from}
+      </Typography>
+      <Typography variant="body2" component="i" noWrap>
+        {getHumanReadableDate(message.date)}
       </Typography>
       <Typography
         variant="body2"
-        color="text.secondary"
-        sx={{
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-        }}
+        noWrap
+        sx={contentSx}
       >
         {message.content}
       </Typography>

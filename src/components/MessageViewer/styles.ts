@@ -11,6 +11,6 @@ export const messageContainerSx: SxProps<Theme> = {
   padding: "1rem",
   marginTop: "1rem",
   borderRadius: "0.5rem",
-  maxHeight: "73vh",
+  maxHeight: "calc(100vh - 10rem)",
   overflowY: "auto",
 };

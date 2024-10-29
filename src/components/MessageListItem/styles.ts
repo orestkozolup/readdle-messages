@@ -5,11 +5,12 @@ export const containerSx: SxProps<Theme> = {
   flexDirection: "column",
   borderRadius: "0.5rem",
   cursor: "pointer",
-  height: "7rem",
+  height: "6.5rem",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   padding: "0 0.5rem",
   marginBottom: "0.5rem",
+  color: (theme) => theme.palette.text.primary,
 
   backgroundImage: (theme) =>
     `linear-gradient(100deg, ${theme.palette.grey[300]} 50%, ${theme.palette.grey[400]} 100%)`,
@@ -34,4 +35,8 @@ export const readItemSx: SxProps<Theme> = {
   backgroundImage: (theme) =>
     `linear-gradient(100deg, ${theme.palette.grey[100]} 50%, ${theme.palette.grey[200]} 100%)`,
   boxShadow: "unset",
+};
+
+export const contentSx: SxProps = {
+  marginTop: "0.3rem",
 };
