@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { messageService, Message } from "../../services/messageService";
 
 const MessageListSidebar = () => {
@@ -6,18 +6,20 @@ const MessageListSidebar = () => {
 
   useEffect(() => {
     const subscription = messageService.messages$.subscribe(setMessages);
-    
+
     return () => subscription.unsubscribe();
   }, []);
 
   return (
     <>
       {messages.map((message) => (
-        <div key={message.id}>
-          <div>
-            <h4>{message.subject}</h4>
-            <p>{message.from}</p>
-          </div>
+        <div
+          key={message.id}
+          style={{ border: "1px solid black", cursor: "pointer" }}
+          onClick={() => messageService.selectMessage(message.id)}
+        >
+          <h4>{message.subject}</h4>
+          <p>{message.from}</p>
         </div>
       ))}
     </>

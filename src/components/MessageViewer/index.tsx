@@ -1,18 +1,31 @@
-import { mockMessages } from "../../services/messageService";
+import { useEffect, useState } from "react";
+
+import { messageService, Message } from "../../services/messageService";
 
 const MessageViewer = () => {
-  const selectedMessage = mockMessages[0];
+  const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
 
-  if (!selectedMessage) {
-    return <div>Select a message to view its details</div>;
-  }
+  useEffect(() => {
+    const subscription =
+      messageService.selectedMessage$.subscribe(setSelectedMessage);
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   return (
-    <>
-      <h2>{selectedMessage.subject}</h2>
-      <p>From: {selectedMessage.from}</p>
-      <p>{selectedMessage.content}</p>
-    </>
+    <div>
+      {selectedMessage ? (
+        <>
+          <h2>{selectedMessage.subject}</h2>
+          <p>From: {selectedMessage.from}</p>
+          <p>{selectedMessage.content}</p>
+        </>
+      ) : (
+        <p>Select a message to view its details</p>
+      )}
+    </div>
   );
 };
 

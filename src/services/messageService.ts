@@ -1,4 +1,5 @@
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, combineLatest } from "rxjs";
+import { map } from "rxjs/operators";
 
 export interface Message {
   id: string;
@@ -42,7 +43,21 @@ export const mockMessages: Message[] = [
 
 // State observables
 const messages$ = new BehaviorSubject<Message[]>(mockMessages);
+const selectedMessageId$ = new BehaviorSubject<string | null>(null);
+const selectedMessage$ = combineLatest([messages$, selectedMessageId$]).pipe(
+  map(
+    ([messages, selectedMessageId]) =>
+      messages.find((message: Message) => message.id === selectedMessageId) ||
+      null
+  )
+);
+
+const selectMessage = (id: string) => {
+  selectedMessageId$.next(id);
+};
 
 export const messageService = {
   messages$,
+  selectedMessage$,
+  selectMessage,
 };
