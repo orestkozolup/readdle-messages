@@ -4,7 +4,12 @@ import Button from "@mui/material/Button";
 
 import { messageService } from "../../services/messageService";
 import { useObservable } from "../../hooks/useObservable";
-import { containerSx, navItemSx, activeNavItemSx } from "./styles";
+import {
+  containerSx,
+  navItemSx,
+  activeNavItemSx,
+  itemsGroupSx,
+} from "./styles";
 import { combineStyles } from "../../utils/styles";
 
 const NavBar = () => {
@@ -20,7 +25,7 @@ const NavBar = () => {
 
   return (
     <Box sx={containerSx}>
-      <ButtonGroup variant="text">
+      <ButtonGroup variant="text" sx={itemsGroupSx} color="inherit">
         {messageCategories.map((category: string) => (
           <Button
             key={category}
