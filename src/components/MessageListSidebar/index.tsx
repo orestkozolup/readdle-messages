@@ -1,6 +1,11 @@
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+
+import MessageListItem from "../MessageListItem";
 import { messageService } from "../../services/messageService";
 import { useObservable } from "../../hooks/useObservable";
 import { Message } from "../../types";
+import { containerSx, btnSectionSx, messageListSx } from "./styles";
 
 const MessageListSidebar = () => {
   const messages = useObservable(messageService.messages$, []);
@@ -14,26 +19,20 @@ const MessageListSidebar = () => {
   };
 
   return (
-    <>
-      <div>
+    <Box sx={containerSx}>
+      <Box sx={btnSectionSx}>
         {messageCategories.map((category: string) => (
           <button key={category} onClick={() => handleCategoryClick(category)}>
             {category}
           </button>
         ))}
-      </div>
-      {messages.map((message: Message) => (
-        <div
-          key={message.id}
-          style={{ border: "1px solid black", cursor: "pointer" }}
-          onClick={() => messageService.selectMessage(message.id)}
-        >
-          <h4>{message.subject}</h4>
-          <p>{message.from}</p>
-          <p>{message.date}</p>
-        </div>
-      ))}
-    </>
+      </Box>
+      <Stack spacing={2} sx={messageListSx}>
+        {messages.map((message: Message) => (
+          <MessageListItem message={message} key={message.id} />
+        ))}
+      </Stack>
+    </Box>
   );
 };
 
