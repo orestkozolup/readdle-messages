@@ -1,6 +1,8 @@
 import { BehaviorSubject, combineLatest } from "rxjs";
 import { map } from "rxjs/operators";
 
+import mockMessages from "./data.json";
+
 export interface Message {
   id: string;
   date: string;
@@ -11,38 +13,12 @@ export interface Message {
   content: string;
 }
 
-export const mockMessages: Message[] = [
-  {
-    id: "1",
-    date: "2024-10-11 12:03",
-    isRead: false,
-    isDeleted: false,
-    subject: "Welcome!",
-    content: "Welcome to messaging service.",
-    from: "admin@messageapp.com",
-  },
-  {
-    id: "2",
-    date: "2024-10-11 12:04",
-    subject: "GDPR",
-    content: "Please review and acknowledge our GDPR policy.",
-    from: "info@messageapp.com",
-    isRead: false,
-    isDeleted: false,
-  },
-  {
-    id: "3",
-    date: "2024-10-11 12:10",
-    subject: "Invitation",
-    content: "You are invited to join.",
-    from: "melanie@oceanside.com",
-    isRead: false,
-    isDeleted: false,
-  },
-];
+const sortedMessages = mockMessages.sort((a, b) => {
+  return new Date(b.date).getTime() - new Date(a.date).getTime();
+});
 
 // State observables
-const allMessages$ = new BehaviorSubject<Message[]>(mockMessages);
+const allMessages$ = new BehaviorSubject<Message[]>(sortedMessages);
 const visibleMessages$ = allMessages$.pipe(
   map((messages) => messages.filter((message) => !message.isDeleted))
 );

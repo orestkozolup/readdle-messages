@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "date": "2024-10-11T15:30:00Z",
+    "isRead": false,
+    "isDeleted": false,
+    "subject": "Welcome!",
+    "content": "Welcome to messaging service.",
+    "from": "admin@messageapp.com"
+  },
+  {
+    "id": "2",
+    "date": "2024-10-11T15:20:00Z",
+    "subject": "GDPR",
+    "content": "Please review and acknowledge our GDPR policy.",
+    "from": "info@messageapp.com",
+    "isRead": false,
+    "isDeleted": false
+  },
+  {
+    "id": "3",
+    "date": "2024-10-11T15:35:00Z",
+    "subject": "Invitation",
+    "content": "You are invited to join.",
+    "from": "melanie@oceanside.com",
+    "isRead": false,
+    "isDeleted": false
+  }
+]

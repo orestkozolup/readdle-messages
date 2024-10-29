@@ -23,6 +23,7 @@ const MessageViewer = () => {
           <h2>{selectedMessage.subject}</h2>
           <p>From: {selectedMessage.from}</p>
           <p>{selectedMessage.content}</p>
+          <p>At: {selectedMessage.date}</p>
           <button onClick={handleToggleRead}>
             Mark as {selectedMessage.isRead ? "Unread" : "Read"}
           </button>
