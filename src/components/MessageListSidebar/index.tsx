@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react";
 import { messageService, Message } from "../../services/messageService";
+import { useObservable } from "../../hooks/useObservable";
 
 const MessageListSidebar = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
-
-  useEffect(() => {
-    const subscription = messageService.messages$.subscribe(setMessages);
-
-    return () => subscription.unsubscribe();
-  }, []);
+  const messages = useObservable(messageService.messages$, []);
 
   return (
     <>
-      {messages.map((message) => (
+      {messages.map((message: Message) => (
         <div
           key={message.id}
           style={{ border: "1px solid black", cursor: "pointer" }}

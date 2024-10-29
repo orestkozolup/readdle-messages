@@ -1,18 +1,8 @@
-import { useEffect, useState } from "react";
-
-import { messageService, Message } from "../../services/messageService";
+import { messageService } from "../../services/messageService";
+import { useObservable } from "../../hooks/useObservable";
 
 const MessageViewer = () => {
-  const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
-
-  useEffect(() => {
-    const subscription =
-      messageService.selectedMessage$.subscribe(setSelectedMessage);
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
+  const selectedMessage = useObservable(messageService.selectedMessage$, null);
 
   return (
     <div>
