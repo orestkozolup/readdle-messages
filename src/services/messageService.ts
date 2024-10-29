@@ -56,8 +56,21 @@ const selectMessage = (id: string) => {
   selectedMessageId$.next(id);
 };
 
+const toggleReadStatus = (messageId: string) => {
+  messages$.next(
+    messages$
+      .getValue()
+      .map((message) =>
+        message.id === messageId
+          ? { ...message, isRead: !message.isRead }
+          : message
+      )
+  );
+};
+
 export const messageService = {
   messages$,
   selectedMessage$,
   selectMessage,
+  toggleReadStatus,
 };
