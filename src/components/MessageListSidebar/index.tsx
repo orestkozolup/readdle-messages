@@ -30,6 +30,7 @@ const MessageListSidebar = () => {
         >
           <h4>{message.subject}</h4>
           <p>{message.from}</p>
+          <p>{message.date}</p>
         </div>
       ))}
     </>

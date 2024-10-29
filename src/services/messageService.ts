@@ -20,6 +20,11 @@ const selectedMessage$ = combineLatest([allMessages$, selectedMessageId$]).pipe(
   )
 );
 
+const sortMessages = (messageList: Message[]) =>
+  messageList.sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
+
 export const initializeMessages = async () => {
   const data = await httpService.getMessages();
 
@@ -31,12 +36,10 @@ export const initializeMessages = async () => {
 
   const categoryNames = Object.keys(messagesData);
 
-  const sortedMessages = messagesData[categoryNames[0]].sort((a, b) => {
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
-  });
+  const sortedMessages = sortMessages(messagesData[categoryNames[0]]);
 
   Object.keys(messagesData).forEach((key) => {
-    observables[key] = new BehaviorSubject(messagesData[key]);
+    observables[key] = new BehaviorSubject(sortMessages(messagesData[key]));
   });
 
   allMessages$.next(sortedMessages);
