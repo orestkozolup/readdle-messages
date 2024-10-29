@@ -91,6 +91,7 @@ export const messageService = {
   messages$: visibleMessages$,
   selectedMessage$,
   messageCategories$,
+  currentCategoryName$,
   selectMessage,
   toggleReadStatus,
   deleteMessage,

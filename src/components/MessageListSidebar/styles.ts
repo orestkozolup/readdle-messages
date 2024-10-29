@@ -6,10 +6,6 @@ export const containerSx: SxProps = {
   height: "100vh",
 };
 
-export const btnSectionSx: SxProps = {
-  height: "50px",
-};
-
 export const messageListSx: SxProps = {
   flex: 1,
   overflowY: "auto",
