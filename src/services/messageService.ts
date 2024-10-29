@@ -13,7 +13,7 @@ export interface Message {
   content: string;
 }
 
-const sortedMessages = mockMessages.sort((a, b) => {
+const sortedMessages = mockMessages.inbox.sort((a, b) => {
   return new Date(b.date).getTime() - new Date(a.date).getTime();
 });
 

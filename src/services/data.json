@@ -1,29 +1,161 @@
-[
-  {
-    "id": "1",
-    "date": "2024-10-11T15:30:00Z",
-    "isRead": false,
-    "isDeleted": false,
-    "subject": "Welcome!",
-    "content": "Welcome to messaging service.",
-    "from": "admin@messageapp.com"
-  },
-  {
-    "id": "2",
-    "date": "2024-10-11T15:20:00Z",
-    "subject": "GDPR",
-    "content": "Please review and acknowledge our GDPR policy.",
-    "from": "info@messageapp.com",
-    "isRead": false,
-    "isDeleted": false
-  },
-  {
-    "id": "3",
-    "date": "2024-10-11T15:35:00Z",
-    "subject": "Invitation",
-    "content": "You are invited to join.",
-    "from": "melanie@oceanside.com",
-    "isRead": false,
-    "isDeleted": false
-  }
-]
+{
+  "inbox": [
+    {
+      "id": "1",
+      "date": "2027-08-11T15:30:00Z",
+      "isRead": false,
+      "isDeleted": false,
+      "subject": "Welcome!",
+      "content": "Welcome to messaging service.",
+      "from": "admin@messageapp.com"
+    },
+    {
+      "id": "2",
+      "date": "2017-08-11T15:20:00Z",
+      "subject": "GDPR",
+      "content": "Please review and acknowledge our GDPR policy.",
+      "from": "info@messageapp.com",
+      "isRead": false,
+      "isDeleted": false
+    },
+    {
+      "id": "3",
+      "date": "2021-06-05T11:10:00Z",
+      "subject": "Invitation",
+      "content": "You are invited to join.",
+      "from": "melanie@oceanside.com",
+      "isRead": false,
+      "isDeleted": false
+    },
+    {
+      "id": "4",
+      "date": "2023-11-09T21:07:00Z",
+      "subject": "Get to know your OneDrive",
+      "content": "OneDrive keeps your picture-perfect moments protected, and helps you rediscover memories from a lifetime of photos and videos. Plus, it’s the simplest way to back up your Windows PC, and if something happens to your device, have peace of mind knowing your stuff is secure in the cloud.",
+      "from": "info@microsoft.com",
+      "isRead": false,
+      "isDeleted": false
+    },
+    {
+      "id": "5",
+      "date": "2021-06-05T11:10:00Z",
+      "subject": "Faster Volume Migrations",
+      "content": "Amazon S3 is an object storage service that offers industry-leading scalability, data availability, security, and performance.",
+      "from": "info@aws.com",
+      "isRead": false,
+      "isDeleted": false
+    },
+    {
+      "id": "6",
+      "date": "2024-10-21T14:42:00Z",
+      "subject": "Homemade Strawberry Cake",
+      "content": "The one thing that sets this strawberry cake apart from others? Reduce fresh strawberry puree down and add to the best white cake batter.",
+      "from": "info@sallycakes.com",
+      "isRead": false,
+      "isDeleted": false
+    },
+    {
+      "id": "7",
+      "date": "2024-10-21T17:11:00Z",
+      "subject": "React Components discussion",
+      "content": "Hello, let's set up a meeting regarding new approach to structuring our React components. How about tomorrow at noon?",
+      "from": "colleague@work.com",
+      "isRead": false,
+      "isDeleted": false
+    },
+    {
+      "id": "8",
+      "date": "2024-10-23T10:00:00Z",
+      "subject": "Meeting reminder: Doctor",
+      "content": "Hello, this email is to remind you of the doctor's appointment you have today at 6pm. This email is automatically generated, please do not reply to it.",
+      "from": "info@doctor.com",
+      "isRead": false,
+      "isDeleted": false
+    },
+    {
+      "id": "9",
+      "date": "2024-10-18T21:07:00Z",
+      "subject": "Car keys found",
+      "content": "Hi, my name is Mike. I'm writing to this email since it was attached to the Mazda car keys that I found yesterday at a bus station. Are you the owner?",
+      "from": "mike@mail.com",
+      "isRead": false,
+      "isDeleted": false
+    },
+    {
+      "id": "10",
+      "date": "2024-10-26T11:37:00Z",
+      "subject": "Your car insurance",
+      "content": "Dear Sir/Madam, we are writing to inform you that your insurance for the car is ready. You can find and download it in your personal account.",
+      "from": "amanda@atlasinsurance.com",
+      "isRead": false,
+      "isDeleted": false
+    }
+  ],
+  "advertisements": [
+    {
+      "id": "11",
+      "date": "2024-10-21T17:11:00Z",
+      "subject": "Refer and Earn",
+      "content": "Invite your friends to join IMBank and we will pay you for each friend that signs up",
+      "from": "info@imbank.com",
+      "isRead": false,
+      "isDeleted": false
+    },
+    {
+      "id": "12",
+      "date": "2024-10-20T09:50:00Z",
+      "subject": "New IPad mini",
+      "content": "iPad mini has everything there is to love about iPad in a delightfully light, compact design. It features a 100 percent recycled aluminum enclosure and stunning all‑screen design, and it goes anywhere you go — fitting perfectly into a backpack or purse.",
+      "from": "info@apple.com",
+      "isRead": false,
+      "isDeleted": false
+    },
+    {
+      "id": "13",
+      "date": "2024-10-19T16:25:00Z",
+      "subject": "New Mazda CX-30",
+      "content": "A breathtaking example of Japanese craftsmanship, the all-new Mazda CX-80 is an elegant three-row SUV offering seating for up to seven passengers. Spacious and versatile, every element is carefully crafted for everything your life has to offer. In Japan, empty space is seen as a canvas. A space you can fill with family and adventure.",
+      "from": "ads@mazda.com",
+      "isRead": false,
+      "isDeleted": false
+    },
+    {
+      "id": "14",
+      "date": "2024-10-11T15:35:00Z",
+      "subject": "Gucci: Cat-eye frame sunglasses",
+      "content": "Gucci products are made with carefully selected materials. Please handle with care for longer product life.",
+      "from": "advertisement@gucci.co.uk",
+      "isRead": false,
+      "isDeleted": false
+    }
+  ],
+  "spam": [
+    {
+      "id": "15",
+      "date": "2022-01-30T04:30:00Z",
+      "isRead": false,
+      "isDeleted": false,
+      "subject": "Urgent Situation",
+      "content": "Hello, this is your uncle. I lost my wallet. Please send me 10$ by clicking the link: http://stealmoney.com",
+      "from": "34_be7in@mail.com"
+    },
+    {
+      "id": "16",
+      "date": "2021-07-10T15:20:00Z",
+      "subject": "Business with 30000% ROI per year!",
+      "content": "Invest $100 now and gat $30k in a year! Cal us at +1234567890 to lern more!",
+      "from": "info@messageapp.com",
+      "isRead": false,
+      "isDeleted": false
+    },
+    {
+      "id": "17",
+      "date": "2019-10-11T15:35:00Z",
+      "subject": "They are all lying to us!",
+      "content": "Subscribe to our newletter to get the real news: http://fakenews.com",
+      "from": "09u4t9^bs@mail.com",
+      "isRead": false,
+      "isDeleted": false
+    }
+  ]
+}
