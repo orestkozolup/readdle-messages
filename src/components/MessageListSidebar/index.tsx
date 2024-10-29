@@ -3,9 +3,24 @@ import { useObservable } from "../../hooks/useObservable";
 
 const MessageListSidebar = () => {
   const messages = useObservable(messageService.messages$, []);
+  const messageCategories = useObservable(
+    messageService.messageCategories$,
+    []
+  );
+
+  const handleCategoryClick = (category: string) => {
+    messageService.changeMessageCategory(category);
+  };
 
   return (
     <>
+      <div>
+        {messageCategories.map((category: string) => (
+          <button key={category} onClick={() => handleCategoryClick(category)}>
+            {category}
+          </button>
+        ))}
+      </div>
       {messages.map((message: Message) => (
         <div
           key={message.id}

@@ -50,18 +50,16 @@ const allMessages$ = new BehaviorSubject<Message[]>([]);
 const visibleMessages$ = allMessages$.pipe(
   map((messages) => messages.filter((message) => !message.isDeleted))
 );
+const messageCategories$ = new BehaviorSubject<string[]>([]);
+const currentCategoryName$ = new BehaviorSubject<string>('');
 const selectedMessageId$ = new BehaviorSubject<string | null>(null);
-const selectedMessage$ = combineLatest([
-  allMessages$,
-  selectedMessageId$,
-]).pipe(
+const selectedMessage$ = combineLatest([allMessages$, selectedMessageId$]).pipe(
   map(
     ([messages, selectedMessageId]) =>
       messages.find((message: Message) => message.id === selectedMessageId) ||
       null
   )
 );
-
 
 export const initializeMessages = async () => {
   const data = await httpService.getMessages();
@@ -76,7 +74,14 @@ export const initializeMessages = async () => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
 
+  Object.keys(mockMessages).forEach((key) => {
+    observables[key] = new BehaviorSubject(mockMessages[key]);
+  });
+
   allMessages$.next(sortedMessages);
+  const categoryNames = Object.keys(mockMessages);
+  messageCategories$.next(categoryNames);
+  currentCategoryName$.next(categoryNames[0]);
 };
 
 initializeMessages();
@@ -109,11 +114,22 @@ const deleteMessage = (messageId: string) => {
   selectedMessageId$.next(null);
 };
 
+const observables: { [key: string]: BehaviorSubject<Message[]> } = {};
+
+const changeMessageCategory = (newCategory: string) => {
+  const previousCategory = currentCategoryName$.getValue();
+  observables[previousCategory].next(allMessages$.getValue());
+  allMessages$.next(observables[newCategory].getValue());
+  currentCategoryName$.next(newCategory);
+  selectedMessageId$.next(null);
+};
 
 export const messageService = {
   messages$: visibleMessages$,
   selectedMessage$,
+  messageCategories$,
   selectMessage,
   toggleReadStatus,
   deleteMessage,
+  changeMessageCategory,
 };
