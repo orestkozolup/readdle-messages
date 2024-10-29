@@ -5,10 +5,10 @@ import MessageViewer from "../MessageViewer";
 
 const Dashboard = () => (
   <Grid container spacing={2}>
-    <Grid size={3}>
+    <Grid size={{ sm: 5, md: 4, lg: 3 }}>
       <MessageListSidebar />
     </Grid>
-    <Grid size={9}>
+    <Grid size={{ sm: 7, md: 8, lg: 9 }}>
       <MessageViewer />
     </Grid>
   </Grid>

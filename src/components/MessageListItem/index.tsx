@@ -1,4 +1,4 @@
-import Box from "@mui/material/Box";
+import { Box, Typography } from "@mui/material";
 
 import { Message } from "../../types";
 import { messageService } from "../../services/messageService";
@@ -15,9 +15,15 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 
   return (
     <Box sx={containerSx} onClick={handleMessageClick}>
-      <h4>{message.subject}</h4>
-      <p>{message.from}</p>
-      <p>{message.date}</p>
+      <Typography variant="subtitle1" component="h4" noWrap>
+        {message.subject}
+      </Typography>
+      <Typography variant="body2" color="text.secondary" noWrap>
+        {message.from} — {message.date}
+      </Typography>
+      <Typography variant="body2" color="text.secondary" sx={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>
+        {message.content}
+      </Typography>
     </Box>
   );
 };

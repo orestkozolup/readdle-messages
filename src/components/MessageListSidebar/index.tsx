@@ -27,7 +27,7 @@ const MessageListSidebar = () => {
           </button>
         ))}
       </Box>
-      <Stack spacing={2} sx={messageListSx}>
+      <Stack spacing={1.5} sx={messageListSx}>
         {messages.map((message: Message) => (
           <MessageListItem message={message} key={message.id} />
         ))}

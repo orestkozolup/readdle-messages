@@ -13,4 +13,5 @@ export const btnSectionSx: SxProps = {
 export const messageListSx: SxProps = {
   flex: 1,
   overflowY: "auto",
+  padding: "0.5rem",
 };
