@@ -11,7 +11,7 @@ import {
   selectedMessage$,
   loading$,
   error$,
-  observables,
+  categoryObservables,
 } from "./state";
 
 import {
@@ -28,23 +28,24 @@ const initializeMessages = async () => {
     const data = await httpService.getMessages();
 
     if (!isMessagesPayload(data)) {
-      throw new Error("Invalid message structure");
+      throw new Error("Invalid messages structure received");
     }
 
     const messagesData: Record<string, Message[]> = data;
 
     const categoryNames = Object.keys(messagesData);
+    messageCategories$.next(categoryNames);
 
-    const sortedMessages = sortMessages(messagesData[categoryNames[0]]);
-
-    Object.keys(messagesData).forEach((key) => {
-      observables[key] = new BehaviorSubject(sortMessages(messagesData[key]));
+    categoryNames.forEach((key) => {
+      categoryObservables[key] = new BehaviorSubject(sortMessages(messagesData[key]));
     });
 
-    loading$.next(false);
+    const initialCategory = categoryNames[0];
+    currentCategoryName$.next(initialCategory);
+    const sortedMessages = sortMessages(messagesData[initialCategory]);
     allMessages$.next(sortedMessages);
-    messageCategories$.next(categoryNames);
-    currentCategoryName$.next(categoryNames[0]);
+    
+    loading$.next(false);
   } catch (error) {
     error$.next(
       error instanceof Error ? error.message : "Something went wrong"

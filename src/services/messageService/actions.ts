@@ -2,7 +2,7 @@ import {
   allMessages$,
   currentCategoryName$,
   selectedMessageId$,
-	observables
+	categoryObservables
 } from "./state";
 
 export const selectMessage = (id: string) => {
@@ -35,8 +35,8 @@ export const deleteMessage = (messageId: string) => {
 
 export const changeMessageCategory = (newCategory: string) => {
   const previousCategory = currentCategoryName$.getValue();
-  observables[previousCategory].next(allMessages$.getValue());
-  allMessages$.next(observables[newCategory].getValue());
+  categoryObservables[previousCategory].next(allMessages$.getValue());
+  allMessages$.next(categoryObservables[newCategory].getValue());
   currentCategoryName$.next(newCategory);
   selectedMessageId$.next(null);
 };

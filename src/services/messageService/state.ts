@@ -7,8 +7,7 @@ export const allMessages$ = new BehaviorSubject<Message[]>([]);
 export const visibleMessages$ = allMessages$.pipe(
   map((messages) => messages.filter((message) => !message.isDeleted))
 );
-export const messageCategories$ = new BehaviorSubject<string[]>([]);
-export const currentCategoryName$ = new BehaviorSubject<string>("");
+
 export const selectedMessageId$ = new BehaviorSubject<string | null>(null);
 export const selectedMessage$ = combineLatest([
   allMessages$,
@@ -20,7 +19,12 @@ export const selectedMessage$ = combineLatest([
       null
   )
 );
+
+export const messageCategories$ = new BehaviorSubject<string[]>([]);
+export const currentCategoryName$ = new BehaviorSubject<string>("");
+
 export const loading$ = new BehaviorSubject<boolean>(true);
 export const error$ = new BehaviorSubject<string>("");
 
-export const observables: { [key: string]: BehaviorSubject<Message[]> } = {};
+// This object keeps an observable for each category of messages. For scalability.
+export const categoryObservables: { [key: string]: BehaviorSubject<Message[]> } = {};
