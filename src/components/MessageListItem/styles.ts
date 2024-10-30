@@ -40,3 +40,7 @@ export const readItemSx: SxProps<Theme> = {
 export const contentSx: SxProps = {
   marginTop: "0.3rem",
 };
+
+export const errorSx: SxProps<Theme> = {
+  color: (theme) => theme.palette.error.main,
+};
