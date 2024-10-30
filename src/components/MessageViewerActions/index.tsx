@@ -12,7 +12,7 @@ interface MessageViewerActionsProps {
 const MessageViewerActions = ({
   selectedMessage,
 }: MessageViewerActionsProps) => {
-  const readValue = selectedMessage && selectedMessage.isRead;
+  const isMessageRead = selectedMessage && selectedMessage.isRead;
 
   const handleSwitchRead = () => {
     if (selectedMessage) {
@@ -29,12 +29,13 @@ const MessageViewerActions = ({
   return (
     <Box sx={containerSx}>
       <FormControlLabel
-        checked={readValue}
+        checked={isMessageRead}
         onChange={handleSwitchRead}
         control={<Switch />}
-        label={`Mark as ${readValue ? "Unread" : "Read"}`}
+        label={`Mark as ${isMessageRead ? "Unread" : "Read"}`}
       />
       <ModalButton
+        buttonText="Delete"
         modalText={`Do you confirm you want to delete message "${selectedMessage.subject}"?`}
         onConfirm={handleDelete}
         buttonType="error"

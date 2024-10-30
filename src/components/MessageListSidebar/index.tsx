@@ -15,8 +15,10 @@ const MessageListSidebar = () => {
     <Box sx={containerSx}>
       <NavBar />
       <Box sx={messageListSx}>
-        {isLoading
-          ? [...Array(5)].map((_, idx) => (
+        {isLoading ? (
+          Array(5)
+            .fill(0)
+            .map((_, idx) => (
               <Skeleton
                 key={idx}
                 sx={skeletonSx}
@@ -25,9 +27,13 @@ const MessageListSidebar = () => {
                 height="6.5rem"
               />
             ))
-          : messages.map((message: Message) => (
-              <MessageListItem message={message} key={message.id} />
-            ))}
+        ) : messages.length === 0 ? (
+          <p>No messages available</p>
+        ) : (
+          messages.map((message: Message) => (
+            <MessageListItem message={message} key={message.id} />
+          ))
+        )}
       </Box>
     </Box>
   );

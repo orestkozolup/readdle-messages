@@ -5,5 +5,5 @@ export const containerSx: SxProps<Theme> = {
   justifyContent: "center",
   alignItems: "center",
   height: "100vh",
-  color: (theme) => theme.palette.error.main
+  color: (theme) => theme.palette.error.main,
 };

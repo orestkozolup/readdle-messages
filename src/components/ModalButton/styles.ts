@@ -16,11 +16,11 @@ export const contentContainerSx: SxProps = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: "0 1rem"
+  padding: "0 1rem",
 };
 
 export const modalFooterSx: SxProps = {
   display: "flex",
   justifyContent: "space-around",
-  padding: "0.5rem"
+  padding: "0.5rem",
 };

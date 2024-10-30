@@ -1,7 +1,6 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 
-import "./App.css";
 import Dashboard from "./components/Dashboard";
 import ErrorFallback from "./components/ErrorFallback";
 import { useObservable } from "./hooks/useObservable";

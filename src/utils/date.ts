@@ -1,4 +1,4 @@
-export const getHumanReadableDate = (dateString: string) => {
+export const getHumanReadableDate = (dateString: string): string => {
   const date = new Date(dateString);
 
   const options: Intl.DateTimeFormatOptions = {

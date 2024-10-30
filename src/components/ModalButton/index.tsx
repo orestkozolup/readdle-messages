@@ -6,6 +6,7 @@ import { SxProps } from "@mui/material/styles";
 import { containerSx, contentContainerSx, modalFooterSx } from "./styles";
 
 interface ModalComponentProps {
+  buttonText: string;
   modalText: string;
   onConfirm: () => void;
   buttonType: ButtonProps["color"];
@@ -13,6 +14,7 @@ interface ModalComponentProps {
 }
 
 const ModalButton = ({
+  buttonText,
   modalText,
   onConfirm,
   buttonType,
@@ -41,18 +43,20 @@ const ModalButton = ({
         onClick={handleModalOpen}
         sx={buttonSx}
       >
-        Delete
+        {buttonText}
       </Button>
       <Modal open={isOpen} onClose={handleCancel}>
         <Box sx={containerSx}>
           <Box sx={contentContainerSx}>
-            <Typography variant="subtitle1">
-              {modalText}
-            </Typography>
+            <Typography variant="subtitle1">{modalText}</Typography>
           </Box>
           <Box sx={modalFooterSx}>
             <Button onClick={handleCancel}>Cancel</Button>
-            <Button onClick={handleConfirm} color={buttonType} variant="contained">
+            <Button
+              onClick={handleConfirm}
+              color={buttonType}
+              variant="contained"
+            >
               Confirm
             </Button>
           </Box>
