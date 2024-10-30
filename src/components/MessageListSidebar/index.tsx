@@ -16,8 +16,9 @@ const MessageListSidebar = () => {
       <NavBar />
       <Box sx={messageListSx}>
         {isLoading
-          ? [...Array(5)].map(() => (
+          ? [...Array(5)].map((_, idx) => (
               <Skeleton
+                key={idx}
                 sx={skeletonSx}
                 variant="rounded"
                 width="100%"

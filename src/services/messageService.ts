@@ -20,6 +20,7 @@ const selectedMessage$ = combineLatest([allMessages$, selectedMessageId$]).pipe(
   )
 );
 const loading$ = new BehaviorSubject<boolean>(true);
+const error$ = new BehaviorSubject<string>("");
 
 const sortMessages = (messageList: Message[]) =>
   messageList.sort((a, b) => {
@@ -27,26 +28,33 @@ const sortMessages = (messageList: Message[]) =>
   });
 
 export const initializeMessages = async () => {
-  const data = await httpService.getMessages();
+  try {
+    const data = await httpService.getMessages();
 
-  if (!isMessagesPayload(data)) {
-    throw new Error("Invalid message structure");
+    if (!isMessagesPayload(data)) {
+      throw new Error("Invalid message structure");
+    }
+
+    const messagesData: Record<string, Message[]> = data;
+
+    const categoryNames = Object.keys(messagesData);
+
+    const sortedMessages = sortMessages(messagesData[categoryNames[0]]);
+
+    Object.keys(messagesData).forEach((key) => {
+      observables[key] = new BehaviorSubject(sortMessages(messagesData[key]));
+    });
+
+    loading$.next(false);
+    allMessages$.next(sortedMessages);
+    messageCategories$.next(categoryNames);
+    currentCategoryName$.next(categoryNames[0]);
+  } catch (error) {
+    error$.next(
+      error instanceof Error ? error.message : "Something went wrong"
+    );
+    loading$.next(false);
   }
-
-  const messagesData: Record<string, Message[]> = data;
-
-  const categoryNames = Object.keys(messagesData);
-
-  const sortedMessages = sortMessages(messagesData[categoryNames[0]]);
-
-  Object.keys(messagesData).forEach((key) => {
-    observables[key] = new BehaviorSubject(sortMessages(messagesData[key]));
-  });
-
-  loading$.next(false);
-  allMessages$.next(sortedMessages);
-  messageCategories$.next(categoryNames);
-  currentCategoryName$.next(categoryNames[0]);
 };
 
 initializeMessages();
@@ -95,6 +103,7 @@ export const messageService = {
   messageCategories$,
   currentCategoryName$,
   loading$,
+  error$,
   selectMessage,
   toggleReadStatus,
   deleteMessage,
