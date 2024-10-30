@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { Box, Typography, Menu, MenuItem } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import { useObservable } from "../../hooks/useObservable";
 import { Message } from "../../types";
@@ -10,6 +11,7 @@ import {
   readItemSx,
   contentSx,
   errorSx,
+  firstLineSx,
 } from "./styles";
 import { combineStyles } from "../../utils/styles";
 import { getHumanReadableDate } from "../../utils/date";
@@ -48,9 +50,12 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 
   return (
     <Box sx={itemStyle} onClick={viewMessage} onContextMenu={openMenu}>
-      <Typography variant="subtitle1" noWrap>
-        {message.subject}
-      </Typography>
+      <Box sx={firstLineSx}>
+        <Typography variant="subtitle1" noWrap>
+          {message.subject}
+        </Typography>
+        {message.isRead && <VisibilityIcon color="success" />}
+      </Box>
       <Typography variant="body2" noWrap>
         From: {message.from}
       </Typography>

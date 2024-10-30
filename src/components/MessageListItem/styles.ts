@@ -44,3 +44,9 @@ export const contentSx: SxProps = {
 export const errorSx: SxProps<Theme> = {
   color: (theme) => theme.palette.error.main,
 };
+
+export const firstLineSx: SxProps<Theme> = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center"
+}
