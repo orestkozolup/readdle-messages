@@ -14,3 +14,7 @@ export const messageContainerSx: SxProps<Theme> = {
   maxHeight: "calc(100vh - 10rem)",
   overflowY: "auto",
 };
+
+export const centeredText: React.CSSProperties = {
+  textAlign: "center",
+};

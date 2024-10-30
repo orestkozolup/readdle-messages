@@ -3,7 +3,7 @@ import { Box, Skeleton } from "@mui/material";
 import MessageViewerActions from "../MessageViewerActions";
 import { messageService } from "../../services/messageService";
 import { useObservable } from "../../hooks/useObservable";
-import { containerSx, messageContainerSx } from "./styles";
+import { containerSx, messageContainerSx, centeredText } from "./styles";
 import { getHumanReadableDate } from "../../utils/date";
 
 const MessageViewer = () => {
@@ -29,7 +29,7 @@ const MessageViewer = () => {
           </Box>
         </>
       ) : (
-        <p>Select a message to view its details</p>
+        <p style={centeredText}>Select a message to view its details</p>
       )}
     </Box>
   );

@@ -14,7 +14,9 @@ interface MessageListItemProps {
 
 const MessageListItem = ({ message }: MessageListItemProps) => {
   const selectedMessage = useObservable(messageService.selectedMessage$, null);
-  const isMessageActive = selectedMessage && selectedMessage.id === message.id;
+  const isMessageActive = !!(
+    selectedMessage && selectedMessage.id === message.id
+  );
 
   const handleMessageClick = () => {
     messageService.selectMessage(message.id);
@@ -37,11 +39,7 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
       <Typography variant="body2" component="i" noWrap>
         {getHumanReadableDate(message.date)}
       </Typography>
-      <Typography
-        variant="body2"
-        noWrap
-        sx={contentSx}
-      >
+      <Typography variant="body2" noWrap sx={contentSx}>
         {message.content}
       </Typography>
     </Box>

@@ -10,7 +10,7 @@ export const combineStyles = (
   };
 
   if (condition) {
-    optionalStyles.forEach(optional => {
+    optionalStyles.forEach((optional) => {
       Object.assign(combinedStyles, optional);
     });
   }
