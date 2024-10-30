@@ -19,6 +19,7 @@ const selectedMessage$ = combineLatest([allMessages$, selectedMessageId$]).pipe(
       null
   )
 );
+const loading$ = new BehaviorSubject<boolean>(true);
 
 const sortMessages = (messageList: Message[]) =>
   messageList.sort((a, b) => {
@@ -42,6 +43,7 @@ export const initializeMessages = async () => {
     observables[key] = new BehaviorSubject(sortMessages(messagesData[key]));
   });
 
+  loading$.next(false);
   allMessages$.next(sortedMessages);
   messageCategories$.next(categoryNames);
   currentCategoryName$.next(categoryNames[0]);
@@ -92,6 +94,7 @@ export const messageService = {
   selectedMessage$,
   messageCategories$,
   currentCategoryName$,
+  loading$,
   selectMessage,
   toggleReadStatus,
   deleteMessage,

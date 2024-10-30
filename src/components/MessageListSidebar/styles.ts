@@ -11,3 +11,7 @@ export const messageListSx: SxProps = {
   overflowY: "auto",
   padding: "0.5rem",
 };
+
+export const skeletonSx: SxProps = {
+  marginBottom: "0.5rem",
+};

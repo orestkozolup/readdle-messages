@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 
@@ -23,23 +23,29 @@ const NavBar = () => {
     ""
   );
 
+  const isLoading = useObservable(messageService.loading$, true);
+
   return (
     <Box sx={containerSx}>
-      <ButtonGroup variant="text" sx={itemsGroupSx} color="inherit">
-        {messageCategories.map((category: string) => (
-          <Button
-            key={category}
-            onClick={() => messageService.changeMessageCategory(category)}
-            sx={combineStyles(
-              currentCategoryName === category,
-              navItemSx,
-              activeNavItemSx
-            )}
-          >
-            {category}
-          </Button>
-        ))}
-      </ButtonGroup>
+      {isLoading ? (
+        <Skeleton width="10rem" height="3rem" />
+      ) : (
+        <ButtonGroup variant="text" sx={itemsGroupSx} color="inherit">
+          {messageCategories.map((category: string) => (
+            <Button
+              key={category}
+              onClick={() => messageService.changeMessageCategory(category)}
+              sx={combineStyles(
+                currentCategoryName === category,
+                navItemSx,
+                activeNavItemSx
+              )}
+            >
+              {category}
+            </Button>
+          ))}
+        </ButtonGroup>
+      )}
     </Box>
   );
 };

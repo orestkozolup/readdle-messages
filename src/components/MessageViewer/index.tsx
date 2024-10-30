@@ -1,4 +1,4 @@
-import Box from "@mui/material/Box";
+import { Box, Skeleton } from "@mui/material";
 
 import MessageViewerActions from "../MessageViewerActions";
 import { messageService } from "../../services/messageService";
@@ -8,6 +8,11 @@ import { getHumanReadableDate } from "../../utils/date";
 
 const MessageViewer = () => {
   const selectedMessage = useObservable(messageService.selectedMessage$, null);
+  const isLoading = useObservable(messageService.loading$, true);
+
+  if (isLoading) {
+    return <Skeleton height="15rem" />;
+  }
 
   return (
     <Box sx={containerSx}>
@@ -17,7 +22,7 @@ const MessageViewer = () => {
           <Box sx={messageContainerSx}>
             <h2>{selectedMessage.subject}</h2>
             <p>
-              From: <b>{selectedMessage.from}</b>
+              From: <strong>{selectedMessage.from}</strong>
             </p>
             <i>{getHumanReadableDate(selectedMessage.date)}</i>
             <p>{selectedMessage.content}</p>

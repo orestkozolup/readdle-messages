@@ -4,6 +4,7 @@ export const containerSx: SxProps = {
   margin: "0.5rem auto",
   overflowX: "auto",
   overflowY: "clip",
+  height: "2rem",
 };
 
 export const itemsGroupSx: SxProps<Theme> = {
