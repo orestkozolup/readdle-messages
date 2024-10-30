@@ -4,7 +4,9 @@ This application displays a list of messages organized by categories.
 
 The app is built with React, TypeScript, RxJS, Material-UI, and Vite.
 
-## Installation and Setup
+You can visit the app online at the link: https://readdle-messages.web.app/
+
+## Local Installation and Setup
 
 1. Install project dependencies:
 
